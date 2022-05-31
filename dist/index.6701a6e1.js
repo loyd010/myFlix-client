@@ -25344,13 +25344,13 @@ class MainView extends _reactDefault.default.Component {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-                    ImagePath: '../img/Shawshank_Redemption.png'
+                    ImagePath: '/src/img/Shawshank_Redemption.png'
                 },
                 {
                     _id: 3,
                     Title: 'Blood Diamond',
                     Description: 'A fisherman, a smuggler, and a syndicate of businessmen match wits over the possession of a priceless diamond.',
-                    ImagePath: '../img/Blood_Diamond.png'
+                    ImagePath: '/src/img/Blood_Diamond.png'
                 }
             ],
             selectedMovie: null
