@@ -68,6 +68,24 @@ export class MainView extends React.Component {
       console.log(error);
     });
   }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
   
   render() {
     const { movies, selectedMovie, user } = this.state;
@@ -93,6 +111,9 @@ export class MainView extends React.Component {
               </Col>
             ))
         }
+
+        {/*Need to figure out where this goes
+         <button onClick={() => { this.onLoggedOut()}}>Logout</button>*/}
 
       </Row>
       );
