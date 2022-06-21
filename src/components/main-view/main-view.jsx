@@ -20,7 +20,8 @@ export class MainView extends React.Component {
     };
   }
 
-  componentDidMount(){
+  /*Commenting out code as added componentDidMount and get request below; may need to add back
+    componentDidMount(){
     axios.get('https://myflix2022-app.herokuapp.com/movies')
     .then(response => {
       this.setState({
@@ -29,7 +30,7 @@ export class MainView extends React.Component {
     })
     .catch(error => { console.log(error);
     });
-  }
+  }*/
 
   setSelectedMovie(newSelectedMovie) {
     this.setState({
