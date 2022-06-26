@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Row, Col, Card, CardGroup, Button } from 'react-bootstrap'
+import { Container, Row, Col, Card, CardGroup, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
 
@@ -16,6 +17,12 @@ export class MovieView extends React.Component {
           <Card.Body>
             <Card.Title>Title: {movie.Title}</Card.Title>
             <Card.Text>Description: {movie.Description}</Card.Text>
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant="link">Director</Button>
+            </Link>
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant="link">Genre</Button>
+            </Link>
             <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
           </Card.Body>
             
