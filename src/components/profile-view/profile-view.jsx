@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Col, Row, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import UserInfo from './user-info';
@@ -9,11 +10,33 @@ import UpdateUser from './update-user';
 export function ProfileView({ movies, onUpdatedUserInfo }){
 
   return (
+    <>
+    <Container>
+      <Row>
+        <Col xs={12} sm={4}>
+        <Card>
+          <Card.Body>
+          <UserInfo name={user.Username} email={user.Email} />
+          </Card.Body>
+        </Card>
+        </Col>
+
+        <Col xs={12} sm={8}>
+        <Card>
+          <Card.Body>
+          <UpdateUser handlesubmit={handleSubmit} handleUpdate={handleUpdate} /> 
+          </Card.Body>
+        </Card>
+        </Col>
+      </Row>
+    </Container>
+    
     <div>
-      <UserInfo name={user.Username} email={user.Email} />
+      
       <FavoriteMovies favoriteMovieList={favoriteMovieList} />
-      <UpdateUser handlesubmit={handleSubmit} handleUpdate={handleUpdate} />
+      
     </div>
+    </>
   )
 
 }
