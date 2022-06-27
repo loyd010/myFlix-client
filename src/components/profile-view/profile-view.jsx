@@ -5,6 +5,7 @@ import axios from 'axios';
 import UserInfo from './user-info';
 import FavoriteMovies from './favorite-movies';
 import UpdateUser from './update-user';
+import PropTypes from 'prop-types';
 
 
 export function ProfileView({ movies, onUpdatedUserInfo }){
