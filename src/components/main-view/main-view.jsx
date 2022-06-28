@@ -13,6 +13,8 @@ import { MovieView } from '../movie-view/movie-view';
 import { Menubar } from '../navbar/navbar';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
+import { UpdateUser } from '../profile-view/update-user';
 
 export class MainView extends React.Component {
   
@@ -75,6 +77,7 @@ export class MainView extends React.Component {
     return (
       <Router>
         <Menubar user={user} />
+        {/*<Link to={`/user/${user}`}>{user}</Link>*/}
         <Row className="main-view justify-content-md-center">
           
           <Route exact path="/" render={() => {
@@ -152,7 +155,7 @@ export class MainView extends React.Component {
             <ProfileView movies={movies} user={user} onBackClick={() => history.goBack()} /></Col>
           }} />
 
-          <Route path={`/user-update/${user}`} render={({match, history}) => {
+          {/*<Route path={`/user-update/${user}`} render={({match, history}) => {
             
             if (!user) return <Col>{ 
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -162,9 +165,9 @@ export class MainView extends React.Component {
           if (movies.length === 0) return <div className="main-view" />;
 
             return <Col>
-            <UserUpdate user={user} onBackClick={() => history.goBack()} />
+            <UpdateUser user={user} onBackClick={() => history.goBack()} />
             </Col>
-          }} />
+          }} />*/}
 
         </Row>
       </Router>
