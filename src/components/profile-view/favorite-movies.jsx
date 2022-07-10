@@ -5,13 +5,13 @@ import axios from 'axios';
 
 import './profile-view.scss';
 
-export function FavoriteMovies({favoriteMovieList}) {
-  const { favoriteMovieList } = props;
+export function FavoriteMovies(props) {
+  //const { favoriteMovieList } = props;
 
   const favoriteMovieId = favoriteMovieList.map(m => m._id)
 
   const favoriteMoviesList = movies.filter(m => {
-    return favoriteMoviesId.includes(m._id)
+    return favoriteMovieId.includes(m._id)
   })
 
   const handleMovieDelete = (movieId) => {
@@ -34,7 +34,7 @@ export function FavoriteMovies({favoriteMovieList}) {
         </Row>
 
         <Row>
-          {favoriteMovieList.map((movies) => {
+          {favoriteMoviesList.map((movies) => {
                   return(
                     <Col xs={12} md={6} lg={3} key={movies._id} className="fav-movie">
                       <Figure>
@@ -49,7 +49,7 @@ export function FavoriteMovies({favoriteMovieList}) {
                         </Link>
                       </Figure>
                 
-                    <Button variant="seconday" onClick={() => handleMovieDelete(movies._id)}>Remove</Button>
+                    <Button variant="secondary" onClick={() => handleMovieDelete(movies._id)}>Remove</Button>
                   </Col>
                   )
                 })
