@@ -15,6 +15,8 @@ export function ProfileView(props){
   const username = localStorage.getItem('username');
   const email = localStorage.getItem('email');
   const token = localStorage.getItem('token');
+  const birthday = localStorage.getItem('birthday');
+  const password = localStorage.getItem('password');
 
   const getUser = () => {
     axios.get('https://myflix2022-app.herokuapp.com/users/${username}', {headers: { Authorization: `Bearer ${token}`}
@@ -45,7 +47,7 @@ export function ProfileView(props){
     e.preventDefault();
     const isReq = validate();
     if(isReq) {
-      axios.put('https://myflix2022-app.herokuapp.com/users/${user.Username}', {
+      axios.put('https://myflix2022-app.herokuapp.com/users/${username}', {
         Username: username,
         Password: password,
         Email: email,
