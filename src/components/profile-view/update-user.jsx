@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../profile-view/profile-view.scss';
 
-export function UpdateUser ({ props }) {
-  const { user } = props;
+export function UpdateUser ({ user, handleUserUpdate }) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
@@ -40,26 +39,33 @@ export function UpdateUser ({ props }) {
       isReq = false;
     }
     return isReq;
-  }
+  };
+
+  const formData = {
+    Username: username,
+    Password: password,
+    Email: email,
+    Birthday: birthday
+  };
   
   
   return (
-<form className='profile-form' onSubmit={(e) => handleUserUpdate(e)}>
+<form className='profile-form' onSubmit={(e) => handleUserUpdate(e, formData, validate)}>
   <h2>Want to change your info?</h2>
   <label>Username:</label>
-  <input type='text' name='Username' defaultValue={user.Username} onChange={e => setUsername(e.target.value)} />
+  <input type='text' name='Username' defaultValue={user?.Username} value={username} onChange={(e) => setUsername(e.target.value)} />
   
   <label>Password:</label>
-  <input type='password' name='passsword' defaultValue={user.Password} onChange={e => setPassword(e.target.value)} />
+  <input type='password' name='passsword' defaultValue={user?.Password} value={password} onChange={(e) => setPassword(e.target.value)} />
 
   <label>Email address:</label>
-  <input type='email' name='email' defaultValue={user.Email} onChange={e => setEmail(e.target.value)} />
+  <input type='email' name='email' defaultValue={user?.Email} onChange={(e) => setEmail(e.target.value)} />
 
   <label>Birthday:</label>
-  <input type='birthday' name='birthday' defaultValue={user.Birthday} onChange={e => setBirthday(e.target.value)} />
+  <input type='birthday' name='birthday' defaultValue={user?.Birthday} onChange={(e) => setBirthday(e.target.value)} />
 
   <button variant='primary' type='submit'>Update</button>
 </form>
-  )
+  );
 }
 

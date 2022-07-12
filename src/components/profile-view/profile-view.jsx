@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import FavoriteMovies from './favorite-movies';
-import UpdateUser from './update-user';
+import { FavoriteMovies } from './favorite-movies';
+import { UpdateUser } from './update-user';
 import PropTypes from 'prop-types';
 
 import './profile-view.scss';
@@ -12,14 +11,12 @@ import './profile-view.scss';
 export function ProfileView(props){
 
   const [ favoriteMoviesList, setFavoriteMovies ] = useState ([]);
-  const username = localStorage.getItem('username');
-  const email = localStorage.getItem('email');
+  const [user, setUser] = useState(null)
+  const username = localStorage.getItem('user');
   const token = localStorage.getItem('token');
-  const birthday = localStorage.getItem('birthday');
-  const password = localStorage.getItem('password');
 
   const getUser = () => {
-    axios.get('https://myflix2022-app.herokuapp.com/users/${username}', {headers: { Authorization: `Bearer ${token}`}
+    axios.get(`https://myflix2022-app.herokuapp.com/users/${username}`, {headers: { Authorization: `Bearer ${token}`}
   })
   .then(response => {
     setUser(response.data);
@@ -33,7 +30,7 @@ export function ProfileView(props){
   }, [])
 
   const handleDelete = () => {
-    axios.delete('https://myflix2022-app.herokuapp.com/users/${username}', {headers: { Authorization: `Bearer ${token}`}
+    axios.delete(`https://myflix2022-app.herokuapp.com/users/${username}`, {headers: { Authorization: `Bearer ${token}`}
   })
   .then(() => {
     alert('The account was successfully deleted.')
@@ -43,21 +40,17 @@ export function ProfileView(props){
   .catch(error => console.error(error))
   }
 
-  const handleUserUpdate = (e) => {
+  const handleUserUpdate = (e, formData, validate) => {
     e.preventDefault();
     const isReq = validate();
     if(isReq) {
-      axios.put('https://myflix2022-app.herokuapp.com/users/${username}', {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
+      axios.put(`https://myflix2022-app.herokuapp.com/users/${username}`, formData,  { headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
         const data = response.data;
-        console.log(data);
+        localStorage.setItem('user', response.data.Username);
         alert('User information successfully updated');
-        window.open('/', '_self');
+        window.open(`/users/$[response.data.Username`, '_self');
       })
       .catch(response => {
         console.error(response);
@@ -75,7 +68,7 @@ export function ProfileView(props){
         <Card>
           <Card.Body>
           <Card.Text>Name: {username}</Card.Text>
-          <Card.Text>Email: {email}</Card.Text>
+          <Card.Text>Email: {user?.email}</Card.Text>
           </Card.Body>
         </Card>
         </Col>
@@ -83,7 +76,7 @@ export function ProfileView(props){
         <Col xs={12} sm={8}>
         <Card>
           <Card.Body>
-          <UpdateUser handleUserUpdate={handleUserUpdate} /> 
+          <UpdateUser handleUserUpdate={handleUserUpdate} user={user} /> 
           </Card.Body>
         </Card>
         </Col>
@@ -92,9 +85,9 @@ export function ProfileView(props){
         <Button variant="danger" onClick={handleDelete}>Delete profile</Button>
       </Row>
     </Container>
-    <Container><FavoriteMovies favoriteMoviesList={favoriteMoviesList} /></Container>  
+    <Container>{/*<FavoriteMovies favoriteMoviesList={favoriteMoviesList} />*/}</Container>  
       
     </>
-  )
+  );
 
 }
