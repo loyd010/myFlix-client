@@ -45315,7 +45315,7 @@ function FavoriteMovies(props) {
         return favoriteMovieId.includes(m._id);
     });
     const handleMovieDelete = (movieId)=>{
-        _axiosDefault.default.delete('https://myflix2022-app.herokuapp.com/movies', {
+        _axiosDefault.default.delete(`https://myflix2022-app.herokuapp.com/movies`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

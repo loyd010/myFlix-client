@@ -15,7 +15,7 @@ export function FavoriteMovies(props) {
   })
 
   const handleMovieDelete = (movieId) => {
-    axios.delete('https://myflix2022-app.herokuapp.com/movies', {headers: { Authorization: `Bearer ${token}`}
+    axios.delete(`https://myflix2022-app.herokuapp.com/movies`, {headers: { Authorization: `Bearer ${token}`}
   })
   .then(() => {
     alert('The movie has been deleted.')
